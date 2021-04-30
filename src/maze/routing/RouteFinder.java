@@ -5,33 +5,61 @@ import java.util.*;
 import java.io.Serializable;
 import java.io.*;
 
-
+/**
+	* Class providing operations and creation of the RouteFinder 
+	* @author Yusuf Adam
+	* @version 1.0, 30th April 2021 
+*/
 public class RouteFinder implements Serializable
 {
 	private Maze maze;
 	private Stack<Tile> route= new Stack<Tile>();
 	private boolean finished;
 
+	/**
+		*Setter method to set the maze in the route finder
+		*@param m used to input the maze
+		*@return Returns a RouteFinder object 
+	*/
 	public RouteFinder(Maze m)
 	{
 		maze= m;
 	}
 
+	/**
+		*Getter method for maze
+		*@return Returns the maze attribute of object
+		RouteFinder 
+	*/
 	public Maze getMaze()
 	{
 		return maze;
 	}
 
+	/**
+		*Getter method for route
+		*@return Returns the route attribute of object
+		RouteFinder
+	*/
 	public List<Tile> getRoute()
 	{
 		return route;
 	}
 
+	/**
+		*Getter method for finished
+		*@return Returns the finished attribute of object
+		RouteFinder, type boolean
+	*/
 	public boolean isFinished()
 	{
 		return finished;
 	}
 
+	/**
+		*Loads route into routefinder
+		*@param s which is the file name that is loaded
+	*/
 	public static RouteFinder load(String s)
 	{
 		RouteFinder routeFinder = null;
@@ -55,6 +83,10 @@ public class RouteFinder implements Serializable
         return routeFinder;
 	}
 
+	/**
+		*Saves the routefinder object to a file
+		*@param s the toString that is being saved
+	*/
 	public void save(String s)
 	{
 		try (
@@ -69,6 +101,11 @@ public class RouteFinder implements Serializable
         }
 	}
 
+	/**
+		*Method that is used to step through the maze to find
+		the solution
+		*@return boolean as to whether the maze has been solved or not
+	*/
 	public boolean step()
 	{
 		if(isFinished())
@@ -128,6 +165,10 @@ public class RouteFinder implements Serializable
 		}
 	}
 
+	/**
+		*Converts the routefinder tiles into a string
+		*@return s which is the file name that is loaded
+	*/
 	public String toString()
 	{
 		String lines ="";

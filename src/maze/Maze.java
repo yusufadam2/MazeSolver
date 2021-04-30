@@ -7,18 +7,47 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.*;
 import java.io.Serializable;
-
+/**
+	* Class providing operations for maze management and creation
+	* @author Yusuf Adam
+	* @version 1.0, 30th April 2021 
+*/
 public class Maze implements Serializable
 {
+	/**
+		*A tile that signals the entry point of the maze
+	*/
 	private Tile entrance;
+
+	/**
+		*A tile that signals the exit point of the maze
+	*/
 	private Tile exit;
+
+	/**
+		*A 2D array that consists of two lists which is used to store all
+		*of the tiles that exist in the maze
+	*/
 	private List<List<Tile>> tiles= new ArrayList<List<Tile>>();
 
+	/**
+		*This is a constructos method for maze, however it doesn't 
+		*do anything
+		*No parameters
+		*Doesn't return anything
+		*Throws nothing
+	*/
 	private Maze()
 	{
 
 	}
 
+	/**
+		*Gets a maze object from a txt file
+		*@param file this is the filename that the maze is built from
+		*@return Returns a Maze object 
+		*@throws InvalidMazeException indicates a problem with the maze
+	*/
 	public static Maze fromTxt(String file) throws InvalidMazeException
 	{
 		Maze maze= new Maze();
@@ -98,6 +127,13 @@ public class Maze implements Serializable
 		return maze;
 	}
 
+	/**
+		*Gets the adjacent tile to the given tile
+		*@param t,d t is of type Tile that indicates which tile is the one
+		*being processed. d is the direction of which the adjacent tile is
+		*found from
+		*@return Returns a Tile object, i.e. the adjacent tile 
+	*/
 	public Tile getAdjacentTile(Tile t, Direction d)
 	{
 		Coordinate c = getTileLocation(t);
@@ -145,16 +181,30 @@ public class Maze implements Serializable
 		return tile;
 	}
 
+	/**
+		*Gets the entrance tile from the maze
+		*@return Returns the entrance tile object
+	*/
 	public Tile getEntrance()
 	{
 		return this.entrance;
 	}
 
+	/**
+		*Gets the exit tile from the maze
+		*@return Returns the exit tile object
+	*/
 	public Tile getExit()
 	{
 		return this.exit;
 	}
 
+	/**
+		*Gets a tile at a given location in the 2D array
+		*@param cin is the coordinates used to find the given tile
+		*@return Returns a Tile object that indicates the tile at the
+		*location
+	*/
 	public Tile getTileAtLocation(Coordinate cin)
 	{
 		int xval= cin.getX();
@@ -165,6 +215,11 @@ public class Maze implements Serializable
 		return tiles.get(yval).get(xval);
 	}
 
+	/**
+		*Gets the coordinate of a given tile
+		*@param tin the tile of which the coordinates are found from 
+		*@return returns a Coordinate object 
+	*/
 	public Coordinate getTileLocation(Tile tin)
 	{
 		Coordinate c = null;
@@ -183,11 +238,19 @@ public class Maze implements Serializable
 		return c;
 	}
 
+	/**
+		*Gets a 2D array of all of the tiles in the maze
+		*@return returns a 2D array of type Tyles
+	*/
 	public List<List<Tile>> getTiles()
 	{
 		return this.tiles;
 	}
 
+	/**
+		*Sets the entrance tile of the maze 
+		*@param ent this is the entrance tile that is used
+	*/
 	private void setEntrance(Tile ent)
 	{
 		if (getTileLocation(ent) == null)
@@ -205,6 +268,10 @@ public class Maze implements Serializable
 		}
 	}
 
+	/**
+		*Sets the exit tile in the maze
+		*@param ex exit tile that is used
+	*/
 	private void setExit(Tile ex)
 	{
 		if (getTileLocation(ex) == null)
@@ -222,6 +289,10 @@ public class Maze implements Serializable
 		}	
 	}
 
+	/**
+		*Converts the maze object into a string
+		*@return Returns a type String which is the converted maze  
+	*/
 	public String toString()
 	{
     	String lines ="";
@@ -236,24 +307,59 @@ public class Maze implements Serializable
     	return lines;
     }
 
+   /**
+	* Class providing operations for coordinate management
+	and creation
+	* @author Yusuf Adam
+	* @version 1.0, 30th April 2021 
+	*/
 	public class Coordinate
-	{
+	{	
+		/**
+		*An integer that is used to represent the x 
+		coordinate of the coordinate 
+		*/
 		private int x;
+
+		/**
+		*An integer that is used to represent the y 
+		coordinate of the coordinate 
+		*/
 		private int y;
 
+		/**
+		*Builder method used to build the coordinate object
+		*@param xin,yin used to build both the x and y parts of the coordinates
+		*@return Returns a Coordinate which has been built
+		*/
 		public Coordinate(int xin, int yin)
 		{
 			this.x= xin;
 			this.y= yin;
 		}
+
+		/**
+		*Gets the x value of the coordinate
+		*@return returns an integer which is the x part of coordinate
+		*/
 		public int getX()
 		{
 			return x;
 		}
+
+		/**
+		*Gets the y value of the coordinate
+		*@return returns an integer which is the y part of the coordinate
+		*/
 		public int getY()
 		{
 			return y;
 		}
+
+		/**
+		*Returns the coordinate as a string
+		*@return returns a type string of the coordinate
+		*/
 		public String toString()
 		{
 			return("("+x +", "+y+")");
@@ -261,6 +367,10 @@ public class Maze implements Serializable
 
 	}
 
+	/**
+		*Enumerate class that is used to declare the 
+		directions  
+	*/
 	public enum Direction
 	{
 		NORTH,
